@@ -16,6 +16,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [App\Http\Controllers\FrontendController::class, 'index'])->name('frontend.index');
 Route::post('/cart/store/{product}', [App\Http\Controllers\CartController::class, 'store'])->name('cart.store');
 Route::resource('add-cart', App\Http\Controllers\CartController::class);
+Route::resource('check-out', App\Http\Controllers\CheckoutController::class);
+Route::get('/thank-you', function () {
+    return view('frontend.cart.thankyou',['cartCount'=> '0']);
+})->name('thank-you');
 
 Auth::routes();
 

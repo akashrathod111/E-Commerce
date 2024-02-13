@@ -27,4 +27,9 @@ class Products extends Model
     {
         return $this->belongsTo(Vendor::class,'vendor_id');
     }
+
+    public function carts()
+    {
+        return $this->hasMany(Cart::class, 'product_id');
+    }
 }

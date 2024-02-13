@@ -111,7 +111,7 @@
 
                     <div class="col-lg-4 col-sm-6 ">
                         <div class="checkout-button">
-                            <a href="checkout" class="btn btn-solid-default btn fw-bold">
+                            <a href="{{url('/check-out')}}" class="btn btn-solid-default btn fw-bold">
                                 Check Out <i class="fas fa-arrow-right ms-1"></i></a>
                         </div>
                     </div>
@@ -128,7 +128,7 @@
                                         <h6>Total <span>${{$totalPrice}}</span></h6>
                                     </div>
                                     <div class="bottom-details">
-                                        <a href="checkout">Process Checkout</a>
+                                        <a href="{{url('/check-out')}}">Process Checkout</a>
                                     </div>
                                 </div>
                             </div>
