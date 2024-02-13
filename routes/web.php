@@ -13,7 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [App\Http\Controllers\FrontendController::class, 'index']);
+Route::get('/', [App\Http\Controllers\FrontendController::class, 'index'])->name('frontend.index');
+Route::post('/cart/store/{product}', [App\Http\Controllers\CartController::class, 'store'])->name('cart.store');
+
 
 Auth::routes();
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Products;
+use App\Models\Cart;
 use Illuminate\Http\Request;
 
 class FrontendController extends Controller
@@ -13,9 +14,10 @@ class FrontendController extends Controller
      */
     public function index()
     {
+        $cartCount = Cart::count();
         $products = Products::with('category')->get();
 
-        return view('frontend.index',['products' => $products]);
+        return view('frontend.index',['products' => $products,'cartCount' => $cartCount]);
     }
 
     /**

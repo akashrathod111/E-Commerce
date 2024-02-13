@@ -168,7 +168,7 @@
                                             <a href="cart/list.html">
                                                 <i data-feather="shopping-cart"></i>
                                                 <span id="cart-count" class="label label-theme rounded-pill">
-                                                    0
+                                                    {{$cartCount}}
                                                 </span>
                                             </a>
                                         </div>

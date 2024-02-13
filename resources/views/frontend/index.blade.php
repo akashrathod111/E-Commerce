@@ -190,9 +190,12 @@
                             <div class="cart-wrap">
                                 <ul>
                                     <li>
-                                        <a href="javascript:void(0)" class="addtocart-btn">
-                                            <i data-feather="shopping-cart"></i>
-                                        </a>
+                                        <form action="{{ route('cart.store',$product->id) }}" method="POST">
+                                            @csrf
+                                            <button type="submit" class="addtocart-btn">
+                                                <i data-feather="shopping-cart"></i>
+                                            </button>
+                                        </form>
                                     </li>
                                     <li>
                                         <a href="javascript:void(0)">
