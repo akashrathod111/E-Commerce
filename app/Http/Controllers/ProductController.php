@@ -42,11 +42,11 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'cat_id' => 'required',
-            'vendor_id' => 'required',
+            'cat_id' => 'required|integer',
+            'vendor_id' => 'required|integer',
             'name' => 'required',
             'description' => 'required',
-            'price' => 'required',
+            'price' => 'required|numeric',
             'image_path' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
@@ -88,12 +88,12 @@ class ProductController extends Controller
     public function update(Request $request, Products $product)
     {
         $request->validate([
-            'cat_id' => 'required',
-            'vendor_id' => 'required',
+            'cat_id' => 'required|integer',
+            'vendor_id' => 'required|integer',
             'name' => 'required',
             'description' => 'required',
-            'price' => 'required',
-            'image_path' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'price' => 'required|numeric',
+            'image_path' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         $params = $request->all();

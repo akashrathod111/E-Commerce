@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Products;
 use Illuminate\Http\Request;
 
 class FrontendController extends Controller
@@ -12,7 +13,9 @@ class FrontendController extends Controller
      */
     public function index()
     {
-        return view('frontend.index');
+        $products = Products::with('category')->get();
+
+        return view('frontend.index',['products' => $products]);
     }
 
     /**
