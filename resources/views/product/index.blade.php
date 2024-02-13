@@ -24,6 +24,7 @@
             <th>Name</th>
             <th>Description</th>
             <th>Price</th>
+            <th>Image</th>
             <th width="280px">Action</th>
         </tr>
         @foreach ($products as $data)
@@ -34,6 +35,11 @@
             <td>{{ $data->name }}</td>
             <td>{{ $data->description }}</td>
             <td>{{ $data->price }}</td>
+            @if($data->image_path)
+            <td> <img src="{{ asset('images/'.$data->image_path) }}" style="height:20vh"></td>
+            @else 
+            <td> </td><span>No image found!</span></td>
+            @endif
             
             
             <td>

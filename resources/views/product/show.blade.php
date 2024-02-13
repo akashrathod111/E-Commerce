@@ -44,6 +44,16 @@
                 {{ $product->price }}
             </div>
         </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Image:</strong>
+                @if($product->image_path)
+                <td> <img src="{{ asset('images/'.$product->image_path) }}" style="height:30vh"></td>
+                @else 
+                <td> </td><span>No image found!</span></td>
+                @endif
+            </div>
+        </div>
     </div>
 </div>
 @endsection

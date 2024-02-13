@@ -8,6 +8,7 @@ use App\Models\Vendor;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -46,9 +47,18 @@ class ProductController extends Controller
             'name' => 'required',
             'description' => 'required',
             'price' => 'required',
+            'image_path' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        Products::create($request->all());
+        $params = $request->all();
+
+        if ($image = $request->file('image_path')){
+            $imageName = time().'-'.uniqid().'.'.$image->getClientOriginalExtension();
+            $request->image_path->move(public_path('images'), $imageName);
+            $params['image_path'] = $imageName;
+        }
+        
+        Products::create($params);
         return redirect()->route('products.index')
                         ->with('success','Product created successfully.');
     }
@@ -83,9 +93,20 @@ class ProductController extends Controller
             'name' => 'required',
             'description' => 'required',
             'price' => 'required',
+            'image_path' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
+
+        $params = $request->all();
+        if ($image = $request->file('image_path')){
+            if ($product->image_path) {
+                Storage::delete('images/' . $product->image_path);
+            }
+            $imageName = time().'-'.uniqid().'.'.$image->getClientOriginalExtension();
+            $request->image_path->move(public_path('images'), $imageName);
+            $params['image_path'] = $imageName;
+        }
         
-        $product->update($request->all());
+        $product->update($params);
         
         return redirect()->route('products.index')
                         ->with('success','Product updated successfully');
