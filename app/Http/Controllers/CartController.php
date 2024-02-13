@@ -14,7 +14,17 @@ class CartController extends Controller
      */
     public function index()
     {
-        //
+        $cartData = Cart::with('product')->get();
+
+        $cartCount = $cartData->count();
+        $cartItems = $cartData->all();
+
+        $totalPrice = 0;
+        foreach ($cartItems as $cartItem) {
+            $totalPrice += $cartItem->product->price * $cartItem->quantity;
+        }
+        return view('frontend.cart.cart_list',['cartItems' => $cartItems,'cartCount'=> $cartCount,'totalPrice' => $totalPrice,]);
+
     }
     /**
      * Show the form for creating a new resource.
@@ -74,8 +84,11 @@ class CartController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Cart $cart)
+    public function destroy($id)
     {
-        //
+        $cartItem = Cart::findOrFail($id);
+        $cartItem->delete();
+        return redirect()->route('add-cart.index')
+                        ->with('success','Item deleted successfully');
     }
 }
