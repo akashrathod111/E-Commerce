@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Products;
+use App\Models\Category;
+use App\Models\Vendor;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -13,7 +16,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Products::latest()->paginate(5);
+        $products = Products::with('category','vendor')->latest()->paginate(5);
         return view('product.index',compact('products'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
@@ -22,7 +25,10 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('product.create');
+        $categories = Category::get()->pluck('name', 'id');
+        $vendors = Vendor::get()->pluck('name', 'id');
+
+        return view('product.create',compact('categories','vendors'));
     }
 
     /**
@@ -37,9 +43,8 @@ class ProductController extends Controller
             'description' => 'required',
             'price' => 'required',
         ]);
-        
+
         Products::create($request->all());
-         
         return redirect()->route('products.index')
                         ->with('success','Product created successfully.');
     }
@@ -49,6 +54,7 @@ class ProductController extends Controller
      */
     public function show(Products $product)
     {
+        $product->with('category','vendor');
         return view('product.show',compact('product'));
     }
 
@@ -57,7 +63,9 @@ class ProductController extends Controller
      */
     public function edit(Products $product)
     {
-        return view('product.edit',compact('product'));
+        $categories = Category::get()->pluck('name', 'id');
+        $vendors = Vendor::get()->pluck('name', 'id');
+        return view('product.edit',compact('product','categories','vendors'));
     }
 
     /**

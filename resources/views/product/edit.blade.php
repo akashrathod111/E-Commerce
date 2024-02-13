@@ -32,13 +32,23 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Category:</strong>
-                    <input type="text" name="cat_id" value="{{ $product->cat_id }}" class="form-control" placeholder="Category">
+                    <select name="cat_id" class="form-control">
+                        <option value="">Select Category</option>
+                        @foreach ($categories as $key => $value)
+                            <option value="{{ $key }}" @if($key == $product->cat_id) selected @endif>{{ $value }}</option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Vendor:</strong>
-                    <input type="text" name="vendor_id" value="{{ $product->vendor_id }}" class="form-control" placeholder="Vender">
+                    <select name="vendor_id" class="form-control">
+                        <option value="">Select Vendor</option>
+                        @foreach ($vendors as $key => $value)
+                            <option value="{{ $key }}" @if($key == $product->vendor_id) selected @endif>{{ $value }}</option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">

@@ -17,4 +17,13 @@ class Products extends Model
         'description',
         'price',
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class,'cat_id');
+    }
+    public function vendor()
+    {
+        return $this->belongsTo(Vendor::class,'vendor_id');
+    }
 }

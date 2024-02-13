@@ -29,8 +29,8 @@
         @foreach ($products as $data)
         <tr>
             <td>{{ ++$i }}</td>
-            <td>{{ $data->cat_id }}</td>
-            <td>{{ $data->vendor_id }}</td>
+            <td>{{ $data->category->name }}</td>
+            <td>{{ $data->vendor->name }}</td>
             <td>{{ $data->name }}</td>
             <td>{{ $data->description }}</td>
             <td>{{ $data->price }}</td>

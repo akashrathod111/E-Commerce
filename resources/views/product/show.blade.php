@@ -17,13 +17,13 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Category:</strong>
-                {{ $product->cat_id }}
+                {{ $product->category->name }}
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Vendor:</strong>
-                {{ $product->vendor_id }}
+                {{ $product->vendor->name }}
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
