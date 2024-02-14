@@ -82,7 +82,6 @@ class VendorController extends Controller
      */
     public function destroy(Vendor $vendor)
     {
-        echo '<pre>'; print_r($vendor); exit;
         $vendor->delete();
          
         return redirect()->route('vendor.index')
